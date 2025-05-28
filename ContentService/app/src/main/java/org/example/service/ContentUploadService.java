@@ -23,6 +23,7 @@ public class ContentUploadService {
 
     @Transactional
     public void uploadContent(ContentUploadRequest request) {
+
         try{
             ClassEntity classEntity = classRepo.findByName(request.getClassName())
                     .orElseGet(() -> classRepo.save(new ClassEntity(request.getClassName())));
@@ -35,11 +36,12 @@ public class ContentUploadService {
             TopicEntity topicEntity=topicRepo.findByNameAndChapterEntity(request.getTopicName(), chapterEntity)
                     .orElseGet(()->topicRepo.save(new TopicEntity(request.getTopicName(), chapterEntity)));
             ContentEntity contentEntity=new ContentEntity(request.getContentTitle(), request.getContent(), topicEntity);
-
             contentRepo.save(contentEntity);
         } catch (RuntimeException e) {
             throw new ContentUploadException("Not able to upload the content");
         }
+
+
 
     }
 }

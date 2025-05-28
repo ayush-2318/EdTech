@@ -26,7 +26,7 @@ public class TopicEntity {
     private ChapterEntity chapterEntity;
 
     @OneToMany(mappedBy = "topicEntity",cascade = CascadeType.ALL)
-    private List<ContentEntity> contentEntity;
+    private List<ContentEntity> content;
 
     public TopicEntity(String name,ChapterEntity chapterEntity){
         this.name=name;

@@ -28,7 +28,7 @@ public class SubjectEntity {
     private List<ChapterEntity> chapter;
 
     public SubjectEntity(String name,ClassEntity classEntity){
-        this.name=name;
+        this.name =name;
         this.classEntity=classEntity;
     }
 }
