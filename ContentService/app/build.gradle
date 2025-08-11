@@ -45,6 +45,9 @@ dependencies {
     annotationProcessor "org.projectlombok:lombok:$lombokVersion"
     testAnnotationProcessor "org.projectlombok:lombok:$lombokVersion"
     testImplementation "org.projectlombok:lombok:$lombokVersion"
+
+    //web socket
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
 }
 
 // Apply a specific Java toolchain to ease working on different environments.

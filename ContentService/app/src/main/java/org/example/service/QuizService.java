@@ -7,6 +7,7 @@ import org.example.repository.ClassRepo;
 import org.example.repository.QuizRepo;
 import org.example.request.QuizUploadRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -52,5 +53,23 @@ public class QuizService {
             }
         }
         quizRepo.saveAll(quizEntityList);
+    }
+
+
+    // send quiz to user through socket
+    @Scheduled(cron = "0 0 10 * * ?")
+    public void getQuiz(){
+        LocalDate todayDate=LocalDate.now();
+        LocalTime targetTime=LocalTime.of(10,0);
+
+        List<QuizEntity> quizEntityList=quizRepo.findByScheduledDate(todayDate);
+
+        for(QuizEntity quiz:quizEntityList){
+            if(!quiz.isVisible()){
+                quiz.setVisible(true);
+                quizRepo.save(quiz);
+            }
+
+        }
     }
 }
